@@ -7,7 +7,7 @@ collatz = {
                "notnum": "Not a number."
     },
     printit: function(printMe, time) {
-        var $li = $("<li><p>" + printMe + "</p></li>").hide();
+        var $li = $("<li><p><span>" + printMe + "</span></p></li>").hide();
         $('#output_list').append($li);
         var delay = time || this.printDelay
         //setTimeout(function() {$li.fadeIn("slow");}, 1000 ); 

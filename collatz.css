@@ -1,19 +1,39 @@
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+    
 body {
     font-family:garamond;
     font-size: 24px;
     color:#666;
-    padding:15px;
-    background: #999;
-    
+    background-image: url("images/white_leather.png");
+}
+
+.main {
+    background: rgba(99,99,99, 0.5);
+    margin: 0;
+    padding: 15px;
+    width: 100%;
+    height: 100%;
+}
+ul, ol {
+    margin-left: 0em;
 }
 
 li { 
+    color: #bbb;
     margin:0 0 5px 0;
-    padding: 5px;
-    background:#fff;
+    padding: 5px 5px 5px 10px;
+    xbackground:#fff;
+    background: -moz-linear-gradient(top,  rgba(213,221,224,0.5) 0%, rgba(203,211,213,0.2) 5%, rgba(110,119,116,0.2) 50%, rgba(10,14,10,0.2) 51%, rgba(10,8,9,0.2) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(213,221,224,0.5)), color-stop(5%,rgba(203,211,213,0.2)), color-stop(50%,rgba(110,119,116,0.2)), color-stop(51%,rgba(10,14,10,0.2)), color-stop(100%,rgba(10,8,9,0.2))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(213,221,224,0.5) 0%,rgba(203,211,213,0.2) 5%,rgba(110,119,116,0.2) 50%,rgba(10,14,10,0.2) 51%,rgba(10,8,9,0.2) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(213,221,224,0.5) 0%,rgba(203,211,213,0.2) 5%,rgba(110,119,116,0.2) 50%,rgba(10,14,10,0.2) 51%,rgba(10,8,9,0.2) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(213,221,224,0.5) 0%,rgba(203,211,213,0.2) 5%,rgba(110,119,116,0.2) 50%,rgba(10,14,10,0.2) 51%,rgba(10,8,9,0.2) 100%); /* IE10+ */
+    background: linear-gradient(top,  rgba(213,221,224,0.5) 0%,rgba(203,211,213,0.2) 5%,rgba(110,119,116,0.2) 50%,rgba(10,14,10,0.2) 51%,rgba(10,8,9,0.2) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80d5dde0', endColorstr='#330a0809',GradientType=0 ); /* IE6-9 */
     border-radius: 5px;
     list-style-position:inside;
 }
+
 /*li p:before {
     content:"• ";
 }*/
@@ -33,6 +53,58 @@ input.button {
     font-size: 24px;
     margin: 10px 0;
     border-radius:16px;
+    /* A semi-transparent text shadow */
+    text-shadow:1px 1px 0 rgba(255,255,255,0.4);
+
+    /* Overriding the default underline styling of the links */
+    text-decoration:none !important;
+    white-space:nowrap;
+
+    display:inline-block;
+    vertical-align:baseline;
+    position:relative;
+    cursor:pointer;
+    padding:10px 20px;
+
+    background-repeat:no-repeat;
+
+    	/* The following two rules are fallbacks, in case
+    	   the browser does not support multiple backgrounds. */
+
+    background-position:bottom left;
+    background-image:url('button_bg.png');
+
+    	/* Multiple backgrounds version. The background images
+    	   are defined individually in color classes */
+
+    	background-position:bottom left, top right, 0 0, 0 0;
+    	background-clip:border-box;
+
+    	/* Applying a default border raidus of 8px */
+
+    	-moz-border-radius:8px;
+    	-webkit-border-radius:8px;
+    	border-radius:8px;
+
+    	/* A 1px highlight inside of the button */
+
+    	-moz-box-shadow:0 0 1px #fff inset;
+    	-webkit-box-shadow:0 0 1px #fff inset;
+    	box-shadow:0 0 1px #fff inset;
+
+    	/* Animating the background positions with CSS3 */
+    	/* Currently works only in Safari/Chrome */
+
+    	-webkit-transition:background-position 1s;
+    	-moz-transition:background-position 1s;
+    	transition:background-position 1s;
 }
 
+input.button:hover{
+    -webkit-animation: hover 0.5s 1;
+    -moz-animation: hover 0.5s 1;
+    -ms-animation: hover 0.5s 1;
+    -o-animation: hover 0.5s 1;
+    animation: hover 0.5s 1;
+}
 ​
