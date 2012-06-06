@@ -1,76 +1,77 @@
-collatz = {
-    currentNumber: 0,
-    iterationCount: 1,
-    printDelay: 200,
-    message: { "open": "Collatz opening number is ",
-               "close": "Game is over.",
-               "notnum": "Not a number."
-    },
-    printit: function(printMe, time) {
-        var $li = $("<li><p><span>" + printMe + "</span></p></li>").hide();
-        $('#output_list').append($li);
-        var delay = time || this.printDelay
-        //setTimeout(function() {$li.fadeIn("slow");}, 1000 ); 
-        $li.each(function(index, element ) {
-           // setTimeout(function() {$(element).fadeIn("slow");}, delay * index );
-           $(element).fadeIn();
-           console.log(element, index);
-           return false;
-            
-        })
-        
-        // var self = this;
-        //         $li.each(function(index, element ) {
-        //            // setTimeout(function() {$(element).fadeIn("slow");}, delay * index );
-        //            $(element).fadeIn();
-        //            console.log(element, index);
-        //            self.loop(self.currentNumber);
-        //            return false;
-        // 
-    },
-    process: function(num){
-        var time = this.printDelay * this.iterationCount;
-        var processedNum;
-        if (num % 2 === 0) {
-            processedNum = num / 2;
-        } else {
-            processedNum = num * 3 + 1;
-        }
-        this.currentNumber = processedNum;
-        this.printit(this.currentNumber, time ); //add time later
-        this.loop(this.currentNumber);
-    },
-    loop: function(num) {
-        if(this.currentNumber !== 1) {
-            console.log(this.currentNumber);
-            this.process(this.currentNumber);
-            this.iterationCount++;
-        } else {
-             this.printit(this.message["close"]);
-        }
-    },
-    validatesInput: function() {
-        var rawInput = parseInt(document.getElementById('number_submit').value);
-        if(!isNaN(rawInput)) {
-            this.currentNumber = rawInput;
-            return true; 
-        }else{
-            return false;
-        }   
-    },
-    clearScreen: function() {
-        $("li").remove();
-    },
-    start: function() {
-        this.clearScreen();
-        if(this.validatesInput()) {             
-            this.printit(this.message["open"] + this.currentNumber);
+"use strict";
+    var collatz = {
+        rawInput: 0,
+        currentNumber: 0,
+        iterationCount: 1,
+        delayTime: 200,
+        printQ: [],
+        message: { "open": "Collatz opening number is ",
+                   "close": "Game is over.",
+                   "notnum": " is not a positive number."
+                },
+        delayPrint: function() {
+          this.printIt();
+        },
+        printIt: function () {
+            //console.log(this.printQ);
+            if(this.printQ.length > 0) {
+                var printMe = this.getFromPrintQ();
+                var $li = $("<li><p>" + printMe + "</p></li>");
+                $('#output_list').append($li);
+                //li.insertAfter($('ul.li'));
+                var _this = this;
+                setTimeout(function() { _this.delayPrint(); }, _this.delayTime);
+            }
+        },
+        addToPrintQ: function (thingToPrint) {
+            this.printQ.push(thingToPrint);
+        },
+        getFromPrintQ: function () {
+            var first = this.printQ.splice(0,1)
+            return first[0];
+        },
+        process: function (num) {
+            var processedNum;
+            if (num % 2 === 0) {
+                processedNum = num / 2;
+            } else {
+                processedNum = num * 3 + 1;
+            }
+            this.currentNumber = processedNum;
+            this.addToPrintQ(this.currentNumber + '');
             this.loop(this.currentNumber);
-        } else{
-            this.printit(this.message["notnum"])
+        },
+        loop: function () {
+            if (this.currentNumber !== 1) {
+                this.process(this.currentNumber);
+                this.iterationCount += 1;
+            } else {
+                this.addToPrintQ(this.message.close);
+                this.delayPrint();
+            }
+        },
+        validatesInput: function () {
+            this.rawInput = $('input#number_submit').val();
+            if (!isNaN(parseInt(this.rawInput, 10))) {
+                this.currentNumber = this.rawInput;
+                return 1; 
+            } else {
+                return false;
+            }
+        },
+        clearScreen: function () {
+            $("ul").children().remove();
+        },
+        start: function () {
+            this.clearScreen();
+            if (this.validatesInput()) {
+                this.addToPrintQ(this.message.open + this.currentNumber);
+                this.loop(this.currentNumber);
+            } else {
+                this.addToPrintQ(this.rawInput + this.message.notnum);
+            }
         }
-    }
-};
+    };
 
 
 
@@ -78,4 +79,12 @@ collatz = {
 //hotpo.printit(3); //tests printit method
 //hotpo.process(2); //tests process prints
 //hotpo.process(3); //tests process prints
-//hotpo.start(762); //tests process prints​​
+//hotpo.start(762); //tests process prints
+
+// var self = this;
+//         $li.each(function(index, element ) {
+//            // setTimeout(function() {$(element).fadeIn("slow");}, delay * index );
+//            $(element).fadeIn();
+//            console.log(element, index);
+//            self.loop(self.currentNumber);
+//            return false;
