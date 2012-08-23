@@ -1,9 +1,13 @@
-"use strict";
+$(document).ready(function() {
+    
+    "use strict";
     var collatz = {
         rawInput: 0,
         currentNumber: 0,
         iterationCount: 1,
-        delayTime: 200,
+        delayTime: 100,
+        fadeIn: 200,
+        fadeAccell: 1,
         printQ: [],
         message: { "open": "Collatz opening number is ",
                    "close": "Game is over.",
@@ -17,8 +21,9 @@
             if(this.printQ.length > 0) {
                 var printMe = this.getFromPrintQ();
                 var $li = $("<li><p>" + printMe + "</p></li>");
+                $li.hide();
                 $('#output_list').append($li);
-                //li.insertAfter($('ul.li'));
+                $li.fadeIn(this.fadeIn);
                 var _this = this;
                 setTimeout(function() { _this.delayPrint(); }, _this.delayTime);
             }
@@ -72,8 +77,13 @@
             }
         }
     };
-
-
+    
+    
+    $('#submit_button').click(function(){
+        collatz.start();
+    });
+    
+});
 
 //Test code    
 //hotpo.printit(3); //tests printit method

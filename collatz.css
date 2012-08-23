@@ -1,6 +1,5 @@
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 html, body {
-    background-image: url("images/white_leather.png");
     font-family:garamond;
     font-size: 24px;
     color:#666;
@@ -14,7 +13,6 @@ body {
 }
 
 #container {
-    
     top:0;
     left:0;
     height:100%;
@@ -26,6 +24,7 @@ ul, ol {
     margin-left: 0em;
     clear:both;
     height:100%;
+    overflow: hidden;
      
 }
 
